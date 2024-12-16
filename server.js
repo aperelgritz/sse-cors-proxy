@@ -1,8 +1,25 @@
 const express = require('express');
 const http = require('http');
 const request = require('request');
+const cors = require('cors');
 
 const app = express();
+
+// Allow CORS for your storefront's origin
+const allowedOrigins = ['https://*.dx.commercecloud.salesforce.com'];
+app.use(
+	cors({
+		origin: (origin, callback) => {
+			if (allowedOrigins.includes(origin) || !origin) {
+				callback(null, true);
+			} else {
+				callback(new Error('Not allowed by CORS'));
+			}
+		},
+		methods: ['GET', 'POST'], // Allow only necessary methods
+		allowedHeaders: ['Authorization', 'Content-Type'], // Allow necessary headers
+	})
+);
 
 app.get('/sse', (req, res) => {
 	const sseUrl = 'https://rcg-ido-spring24.my.salesforce-scrt.com/eventrouter/v1/sse';
