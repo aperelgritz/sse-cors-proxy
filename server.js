@@ -6,7 +6,7 @@ const cors = require('cors');
 const app = express();
 
 // Allow CORS for your storefront's origin
-const allowedOrigins = ['https://*.dx.commercecloud.salesforce.com'];
+const allowedOrigins = ['https://zzse-022.dx.commercecloud.salesforce.com'];
 app.use(
 	cors({
 		origin: (origin, callback) => {
