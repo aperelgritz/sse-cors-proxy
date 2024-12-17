@@ -36,6 +36,16 @@ app.get('/sse', (req, res) => {
 
 	const clientReq = request(options);
 
+	// Periodic keep-alive comments to avoid Heroku timeout
+	const keepAliveInterval = setInterval(() => {
+		try {
+			res.write(': keep-alive\n\n'); // Send a comment as a keep-alive signal
+		} catch (error) {
+			console.error('Error sending keep-alive signal:', error);
+			clearInterval(keepAliveInterval); // Stop interval on failure
+		}
+	}, 25000); // Send every 25 seconds (Heroku's timeout is 30 seconds)
+
 	clientReq.on('data', (chunk) => {
 		try {
 			res.write(chunk); // Relay data to the frontend
