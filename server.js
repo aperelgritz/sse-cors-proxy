@@ -6,20 +6,31 @@ const cors = require('cors');
 const app = express();
 
 // Allow CORS for your storefront's origin
-const allowedOrigins = ['https://zzse-022.dx.commercecloud.salesforce.com'];
+// const allowedOrigins = ['https://zzse-022.dx.commercecloud.salesforce.com'];
+// app.use(
+// 	cors({
+// 		origin: (origin, callback) => {
+// 			if (allowedOrigins.includes(origin) || !origin) {
+// 				callback(null, true);
+// 			} else {
+// 				callback(new Error('Not allowed by CORS'));
+// 			}
+// 		},
+// 		methods: ['GET', 'POST'], // Allow only necessary methods
+// 		allowedHeaders: ['Authorization', 'Content-Type'], // Allow necessary headers
+// 	})
+// );
+// CORS middleware configuration
 app.use(
 	cors({
-		origin: (origin, callback) => {
-			if (allowedOrigins.includes(origin) || !origin) {
-				callback(null, true);
-			} else {
-				callback(new Error('Not allowed by CORS'));
-			}
-		},
-		methods: ['GET', 'POST'], // Allow only necessary methods
-		allowedHeaders: ['Authorization', 'Content-Type'], // Allow necessary headers
+		origin: 'https://zzse-022.dx.commercecloud.salesforce.com',
+		methods: ['GET', 'OPTIONS'], // Allow GET and preflight OPTIONS requests
+		allowedHeaders: ['Authorization', 'Content-Type', 'X-Org-Id'], // Allow custom headers
 	})
 );
+
+// Handle preflight OPTIONS requests
+app.options('/sse', cors());
 
 app.get('/sse', (req, res) => {
 	const sseUrl = 'https://rcg-ido-spring24.my.salesforce-scrt.com/eventrouter/v1/sse';
