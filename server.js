@@ -23,7 +23,7 @@ const app = express();
 // CORS middleware configuration
 app.use(
 	cors({
-		origin: 'https://zzse-022.dx.commercecloud.salesforce.com',
+		origin: ['https://zzse-022.dx.commercecloud.salesforce.com', 'https://aperelgritz.github.io'],
 		methods: ['GET', 'OPTIONS'], // Allow GET and preflight OPTIONS requests
 		allowedHeaders: ['Authorization', 'Content-Type', 'X-Org-Id'], // Allow custom headers
 	})
