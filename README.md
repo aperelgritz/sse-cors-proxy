@@ -22,6 +22,8 @@ This application has been tested on Heroku, and sends a keep-alive signal every 
 **On your local environment:**
 
 - `git clone git@github.com:aperelgritz/sse-cors-proxy.git`
+- `cd sse-cors-proxy`
+- `npm install`
 - `heroku login`
 - `heroku create <pick-an-app-name> --team sfdc-aloha`
 - `git push heroku main`
