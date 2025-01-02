@@ -5,25 +5,9 @@ const cors = require('cors');
 
 const app = express();
 
-// Allow CORS for your storefront's origin
-// const allowedOrigins = ['https://zzse-022.dx.commercecloud.salesforce.com'];
-// app.use(
-// 	cors({
-// 		origin: (origin, callback) => {
-// 			if (allowedOrigins.includes(origin) || !origin) {
-// 				callback(null, true);
-// 			} else {
-// 				callback(new Error('Not allowed by CORS'));
-// 			}
-// 		},
-// 		methods: ['GET', 'POST'], // Allow only necessary methods
-// 		allowedHeaders: ['Authorization', 'Content-Type'], // Allow necessary headers
-// 	})
-// );
-// CORS middleware configuration
 app.use(
 	cors({
-		origin: ['https://zzse-022.dx.commercecloud.salesforce.com', 'https://aperelgritz.github.io'],
+		origin: [process.env.ALLOWED_ORIGIN_1, process.env.ALLOWED_ORIGIN_2],
 		methods: ['GET', 'OPTIONS'], // Allow GET and preflight OPTIONS requests
 		allowedHeaders: ['Authorization', 'Content-Type', 'X-Org-Id'], // Allow custom headers
 	})
@@ -33,7 +17,7 @@ app.use(
 app.options('/sse', cors());
 
 app.get('/sse', (req, res) => {
-	const sseUrl = 'https://rcg-ido-spring24.my.salesforce-scrt.com/eventrouter/v1/sse';
+	const sseUrl = process.env.SSE_URL;
 	const ts = Date.now();
 
 	const options = {
@@ -41,7 +25,7 @@ app.get('/sse', (req, res) => {
 		headers: {
 			Authorization: req.headers.authorization,
 			Accept: 'text/event-stream',
-			'X-Org-Id': '00D0900000DYKY0',
+			'X-Org-Id': ORG_ID,
 		},
 	};
 
