@@ -2,12 +2,16 @@ const express = require('express');
 const http = require('http');
 const request = require('request');
 const cors = require('cors');
+require('dotenv').config();
 
 const app = express();
 
 app.use(
 	cors({
-		origin: [process.env.ALLOWED_ORIGIN_1, process.env.ALLOWED_ORIGIN_2],
+		origin: [
+			process.env.ALLOWED_ORIGIN_1 ? process.env.ALLOWED_ORIGIN_1 : '',
+			process.env.ALLOWED_ORIGIN_2 ? process.env.ALLOWED_ORIGIN_2 : '',
+		],
 		methods: ['GET', 'OPTIONS'], // Allow GET and preflight OPTIONS requests
 		allowedHeaders: ['Authorization', 'Content-Type', 'X-Org-Id'], // Allow custom headers
 	})
