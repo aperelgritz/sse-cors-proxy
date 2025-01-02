@@ -25,7 +25,7 @@ app.get('/sse', (req, res) => {
 		headers: {
 			Authorization: req.headers.authorization,
 			Accept: 'text/event-stream',
-			'X-Org-Id': ORG_ID,
+			'X-Org-Id': process.env.ORG_ID,
 		},
 	};
 
