@@ -30,10 +30,10 @@ This application has been tested on Heroku, and sends a keep-alive signal every 
 
 **On Heroku:**
 
-- Open https://dashboard.heroku.com/apps/<pick-an-app-name>/settings
+- Open `https://dashboard.heroku.com/apps/<pick-an-app-name>/settings`
 - Configure the SSE_URL variable:
   - Key: SSE_URL
-  - Value: your SSE URL, typically in the format https://<org-name>.my.salesforce-scrt.com/eventrouter/v1/sse
+  - Value: your SSE URL, typically in the format `https://<your-org-name>.my.salesforce-scrt.com/eventrouter/v1/sse`
 - Configure the ORG_ID variable:
   - Key: ORG_ID
   - Value: your org ID
